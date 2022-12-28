@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --timeout 2000 --exit",
     "dev": "NODE_ENV=development nodemon server.js",
-    "build": "NODE_ENV=production pm2 start server.js --name=\"ecommerce-api\""
+    "build": "NODE_ENV=production pm2 start server.js --name=\"ecommerce-api\"",
+    "start": "node server.js"
   },
   "author": "Mateus Machado",
   "license": "ISC",
@@ -15,7 +16,7 @@
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "ejs": "^2.6.1",
+    "ejs": "^3.1.8",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "express-validation": "^1.0.2",
@@ -36,5 +37,17 @@
     "request": "^2.88.0",
     "xml2js": "^0.4.19",
     "xml2json": "^0.11.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateusfmachado/edz-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mateusfmachado/edz-api/issues"
+  },
+  "homepage": "https://github.com/mateusfmachado/edz-api#readme"
 }

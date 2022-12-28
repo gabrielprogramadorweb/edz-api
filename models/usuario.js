@@ -1,3 +1,4 @@
+//Modelo de usuario//
 const mongoose = require("mongoose"),
       Schema= mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
@@ -16,7 +17,7 @@ const UsuarioSchema = new mongoose.Schema({
         unique: true,
         required: [true,"não pode ficar vazio."],
         index: true,
-        match: [/\S+@\S+\.\S+/, 'é inválido.']
+        match: [/\S+@\S+\.\S+/, 'é inválido.'] //Obriga a usar o "exemplo@gmail.com"
     },
     loja: {
         type: Schema.Types.ObjectId,
@@ -39,20 +40,20 @@ const UsuarioSchema = new mongoose.Schema({
 },{ timestamps: true });
 
 UsuarioSchema.plugin(uniqueValidator, { message: "já está sendo utilizado" });
-
+//Criando uma nova senha para o usuario//
 UsuarioSchema.methods.setSenha = function(password){
     this.salt = crypto.randomBytes(16).toString("hex");
     this.hash = crypto.pbkdf2Sync(password, this.salt, 10000,512, "sha512").toString("hex");
 };
-
+//Verificação se senha//
 UsuarioSchema.methods.validarSenha = function(password){
     const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, "sha512").toString("hex");
     return hash === this.hash;
 };
-
+//Gerar Token //
 UsuarioSchema.methods.gerarToken = function(){
     const hoje = new Date();
-    const exp = new Date(hoje);
+    const exp = new Date(today);
     exp.setDate(hoje.getDate() + 15);
 
     return jwt.sign({
@@ -62,7 +63,7 @@ UsuarioSchema.methods.gerarToken = function(){
         exp: parseFloat(exp.getTime() / 1000, 10)
     }, secret);
 };
-
+//envia token// 
 UsuarioSchema.methods.enviarAuthJSON = function(){
     return {
         _id: this._id,
